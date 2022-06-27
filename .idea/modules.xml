@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/piperaceae-segmentation.iml" filepath="$PROJECT_DIR$/.idea/piperaceae-segmentation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/piperaceae-segementation.iml" filepath="$PROJECT_DIR$/.idea/piperaceae-segementation.iml" />
     </modules>
   </component>
 </project>
