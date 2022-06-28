@@ -1,39 +1,65 @@
 import numpy
 import pathlib
+import sklearn
+import sklearn.utils
 import skimage
 import skimage.io
 
 import cv2
 
-
-def return_genus(nome_arquivo):
-    lista_generos = list(["manekia", "ottonia", "piper", "pothomorphe", "peperomia"])
-    return next((genero for genero in lista_generos if genero in nome_arquivo), None)
-
-
-def carrega_mascara(nome_arquivo):
-    return numpy.float32(skimage.io.imread(nome_arquivo) / 255)
+img_size = 300
+dir_mask = "images/mascara"
+dir_images_resize = f"images/{img_size}x{img_size}/originais/resize"
 
 
-def retorna_todas_mascaras():
-    return zip(*[(carrega_mascara(nome_arquivo), return_genus(nome_arquivo.name))
-                 for nome_arquivo in sorted(pathlib.Path("images/mascara").rglob("*"))])
+def return_all_files_of_dir(dir):
+    return sorted(pathlib.Path(dir).rglob("*"))
 
 
-def carrega_imagem_original(nome_arquivo):
-    return skimage.img_as_float32(skimage.io.imread(nome_arquivo))
+def return_genus(filename):
+    list_genus = list(["manekia", "ottonia", "piper", "pothomorphe", "peperomia"])
+    return next((genus for genus in list_genus if genus in filename), None)
 
 
-def retorna_todas_imgs_originais():
-    return [carrega_imagem_original(nome_arquivo) for nome_arquivo in sorted(pathlib.Path("images/originais").rglob("*"))]
+def load_mask(filename):
+    return numpy.float32(skimage.io.imread(filename) / 255)
+
+
+def return_all_mask():
+    return [{"filename": filename.name, "file": load_mask(filename), "genus": return_genus(filename.name)}
+            for filename in return_all_files_of_dir(dir_mask)]
+
+
+def load_original_image(filename):
+    return skimage.img_as_float32(skimage.io.imread(filename))
+
+
+def return_all_original_images():
+    return [{"filename": filename.name, "file": load_original_image(filename), "genus": return_genus(filename.name)}
+            for filename in return_all_files_of_dir(dir_images_resize)]
 
 
 def main():
-    lista_todas_mascaras, lista_generos = retorna_todas_mascaras()
-    lista_todas_imgs_originais = retorna_todas_imgs_originais()
-    print(lista_todas_mascaras, type(lista_todas_mascaras), len(lista_todas_mascaras))
-    print(lista_generos, type(lista_generos), len(lista_generos))
-    print(lista_todas_imgs_originais, type(lista_todas_imgs_originais), len(lista_todas_imgs_originais))
+    list_all_mask = return_all_mask()
+    list_all_original_images = return_all_original_images()
+
+    list_only_images = [image.get("file") for image in list_all_original_images]
+    list_only_genus = [image.get("genus") for image in list_all_original_images]
+
+    print(f"len(list_only_images) {len(list_only_images)}")
+    print(f"len(list_only_genus) {len(list_only_genus)}")
+
+    X = numpy.array(list_only_images).reshape((len(list_only_images), img_size, img_size, 1))
+    Y = numpy.array(list_only_genus).reshape((len(list_only_genus), img_size, img_size, 1))
+    X, Y = sklearn.utils.shuffle(X, Y, random_state=1234)
+
+    X_train, X_test, Y_train, Y_test = sklearn.train_test_split(X, Y, test_size=0.05, random_state=1234)
+    X_train, X_val, Y_train, Y_val = sklearn.train_test_split(X_train, Y_train, test_size=0.05, random_state=1234)
+
+    print(X_train.shape)
+    print(X_val.shape)
+    print(X_test.shape)
+    print(X.shape)
 
 
 # Press the green button in the gutter to run the script.
