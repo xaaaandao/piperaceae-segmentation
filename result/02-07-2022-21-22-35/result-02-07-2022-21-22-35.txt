@@ -1,0 +1,9 @@
+learning_rate=0.01
+batch_size=16
+============================================
+Jaccard distance (IoU) train: 0.026520991697907448
+Dice coeffient train: 0.9861660003662109
+Jaccard distance (IoU) validation: 0.015730708837509155
+Dice coeffient validation: 0.9916583299636841
+Jaccard distance (IoU) test: 0.020358584821224213
+Dice coeffient test: 0.9891592860221863
