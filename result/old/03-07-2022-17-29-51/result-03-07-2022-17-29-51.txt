@@ -1,0 +1,11 @@
+unet filename=model/batch16+lr0_05+epoch100+steps22+unet.h5
+X: (375, 400, 400, 1), X_train: (338, 400, 400, 1), X_val: (18, 400, 400, 1), X_test: (19, 400, 400, 1)
+learning_rate=0.05, batch_size=16
+epochs=100, steps=22
+============================================
+Jaccard distance (IoU) train: 0.0276313666254282
+Dice coeffient train: 0.984276533126831
+Jaccard distance (IoU) validation: 0.045524440705776215
+Dice coeffient validation: 0.9751680493354797
+Jaccard distance (IoU) test: 0.02469153143465519
+Dice coeffient test: 0.9857825636863708

@@ -1,6 +1,0 @@
-Mean Jaccard distance (IoU) train: 0.0
-Mean Dice coeffient train: 0.0
-Mean Jaccard distance (IoU) validation: 0.0
-Mean Dice coeffient validation: 0.0
-Mean Jaccard distance (IoU) test: 0.0
-Mean Dice coeffient test: 0.0
