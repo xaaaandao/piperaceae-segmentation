@@ -5,4 +5,8 @@
     <orderEntry type="jdk" jdkName="Remote Python 3.8.13 (sftp://xandao@192.168.1.6:22/home/xandao/miniconda3/bin/python)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PackageRequirementsSettings">
+    <option name="removeUnused" value="true" />
+    <option name="modifyBaseFiles" value="true" />
+  </component>
 </module>

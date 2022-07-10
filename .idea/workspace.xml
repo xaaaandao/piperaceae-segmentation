@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="487fcd5d-89e3-4bc5-aaf2-b821bb1b0061" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/piperaceae-segmentation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/piperaceae-segmentation.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +93,9 @@
       <workItem from="1657371860304" duration="180000" />
       <workItem from="1657372060150" duration="6371000" />
       <workItem from="1657388650031" duration="18846000" />
-      <workItem from="1657411686655" duration="367000" />
+      <workItem from="1657411686655" duration="7350000" />
+      <workItem from="1657467825007" duration="490000" />
+      <workItem from="1657468539668" duration="19000" />
     </task>
     <servers />
   </component>
