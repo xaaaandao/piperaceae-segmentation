@@ -89,7 +89,8 @@
       <workItem from="1657320974802" duration="4655000" />
       <workItem from="1657371860304" duration="180000" />
       <workItem from="1657372060150" duration="6371000" />
-      <workItem from="1657388650031" duration="8734000" />
+      <workItem from="1657388650031" duration="18846000" />
+      <workItem from="1657411686655" duration="367000" />
     </task>
     <servers />
   </component>
@@ -103,11 +104,6 @@
           <url>notebook://C:/Users/xandao/PycharmProjects/piperaceae-segmentation/piperaceae-segmentation.ipynb</url>
           <line>26</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
-          <url>notebook://C:/Users/xandao/Documents/GitHub/piperaceae-segmentation/main.ipynb</url>
-          <line>1</line>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
