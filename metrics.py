@@ -9,20 +9,37 @@ def calculate_iou_dice(model, x_test, x_train, x_val, y_test, y_train, y_val):
     return Metrics(dice_test, dice_train, dice_val, iou_test, iou_train, iou_val)
 
 
-def jaccard_distance_loss(y_true, y_pred, smooth=100):
-    intersection = tensorflow.keras.backend.sum(tensorflow.keras.backend.abs(y_true * y_pred), axis=-1)
-    union = tensorflow.keras.backend.sum(tensorflow.keras.backend.abs(y_true) + tensorflow.keras.backend.abs(y_pred),
-                                         axis=-1)
+# Loss functions
+def jaccard_distance_loss(y_true, y_pred, smooth=1):
+    intersection = tensorflow.math.reduce_sum(tensorflow.math.abs(y_true * y_pred))
+    union = tensorflow.math.reduce_sum(tensorflow.math.abs(y_true) + tensorflow.math.abs(y_pred))
     jac = (intersection + smooth) / (union - intersection + smooth)
-    loss = (1 - jac) * smooth
+    loss = (1 - jac)
     return loss
 
 
-def dice_coef(y_true, y_pred, smooth=1):
-    intersection = tensorflow.keras.backend.sum(tensorflow.keras.backend.abs(y_true * y_pred), axis=-1)
-    union = tensorflow.keras.backend.sum(tensorflow.keras.backend.abs(y_true), -1) + tensorflow.keras.backend.sum(
-        tensorflow.keras.backend.abs(y_pred), -1)
-    return (2. * intersection + smooth) / (union + smooth)
+def dice_loss(y_true, y_pred, smooth=1):
+    intersection = tensorflow.math.reduce_sum(tensorflow.math.abs(y_true * y_pred))
+    union = tensorflow.math.reduce_sum(tensorflow.math.abs(y_true) + tensorflow.math.abs(y_pred))
+    dice = (2. * intersection + smooth) / (union + smooth)
+    loss = 1 - dice
+    return loss
+
+
+# def jaccard_distance_loss(y_true, y_pred, smooth=100):
+#     intersection = tensorflow.keras.backend.sum(tensorflow.keras.backend.abs(y_true * y_pred), axis=-1)
+#     union = tensorflow.keras.backend.sum(tensorflow.keras.backend.abs(y_true) + tensorflow.keras.backend.abs(y_pred),
+#                                          axis=-1)
+#     jac = (intersection + smooth) / (union - intersection + smooth)
+#     loss = (1 - jac) * smooth
+#     return loss
+#
+#
+# def dice_coef(y_true, y_pred, smooth=1):
+#     intersection = tensorflow.keras.backend.sum(tensorflow.keras.backend.abs(y_true * y_pred), axis=-1)
+#     union = tensorflow.keras.backend.sum(tensorflow.keras.backend.abs(y_true), -1) + tensorflow.keras.backend.sum(
+#         tensorflow.keras.backend.abs(y_pred), -1)
+#     return (2. * intersection + smooth) / (union + smooth)
 
 
 @dataclasses.dataclass

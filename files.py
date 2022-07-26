@@ -93,13 +93,16 @@ def save_image(filename, image, path):
 
 
 def predict_and_save(cfg, model, path, x, y):
-    for image in x:
+    for i, image in enumerate(x):
+        p = os.path.join(path, str(i))
+        pathlib.Path(p).mkdir(parents=True, exist_ok=True)
+
         file = getattr(image["image"], "file")
         image_original = getattr(image["image"], "image")
         mask_original = getattr(image["mask"], "image")
         image_original = image_original.reshape((1, cfg["image_size"], cfg["image_size"], 1))
         mask_original = mask_original.reshape((1, cfg["image_size"], cfg["image_size"], 1))
-        mask_original = numpy.uint8(mask_original[0,:,:,0] > 0.5)
+        mask_original = numpy.uint8(mask_original[0, :, :, 0] > 0.5)
 
         # print(type(image), image)
         mask_unet = pred_mask(image_original, model)
@@ -107,11 +110,11 @@ def predict_and_save(cfg, model, path, x, y):
         image_with_mask_unet = apply_mask(image_original, mask_unet)
         convert_background_color(image_with_mask_original)
         convert_background_color(image_with_mask_unet)
-        save_image(f"{file.stem}+original.png", image_original[0,:,:,0], path)
-        save_image(f"{file.stem}+mask_original.png", mask_original[0,:,:,0], path)
-        save_image(f"{file.stem}+mask_unet.png", mask_unet, path)
-        save_image(f"{file.stem}+img+mask_original.png", image_with_mask_original, path)
-        save_image(f"{file.stem}+img+mask_unet.png", image_with_mask_unet, path)
+        save_image(f"{file.stem}+original.png", image_original[0, :, :, 0], p)
+        save_image(f"{file.stem}+mask_original.png", mask_original[0, :, :, 0], p)
+        save_image(f"{file.stem}+mask_unet.png", mask_unet, p)
+        save_image(f"{file.stem}+img+mask_original.png", image_with_mask_original, p)
+        save_image(f"{file.stem}+img+mask_unet.png", image_with_mask_unet, p)
 
 
 def save_figs(cfg, model, path, x_test, x_train, x_val, y_test, y_train, y_val):
@@ -122,5 +125,5 @@ def save_figs(cfg, model, path, x_test, x_train, x_val, y_test, y_train, y_val):
     path_val = os.path.join(path, "val")
     pathlib.Path(path_val).mkdir(parents=True, exist_ok=True)
     predict_and_save(cfg, model, path_test, x_test, y_test)
-    predict_and_save(model, path_train, x_train, y_train)
-    predict_and_save(model, path_val, x_val, y_val)
+    # predict_and_save(cfg, model, path_train, x_train, y_train)
+    # predict_and_save(cfg, model, path_val, x_val, y_val)
