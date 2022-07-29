@@ -25,23 +25,6 @@ def dice_loss(y_true, y_pred, smooth=1):
     loss = 1 - dice
     return loss
 
-
-# def jaccard_distance_loss(y_true, y_pred, smooth=100):
-#     intersection = tensorflow.keras.backend.sum(tensorflow.keras.backend.abs(y_true * y_pred), axis=-1)
-#     union = tensorflow.keras.backend.sum(tensorflow.keras.backend.abs(y_true) + tensorflow.keras.backend.abs(y_pred),
-#                                          axis=-1)
-#     jac = (intersection + smooth) / (union - intersection + smooth)
-#     loss = (1 - jac) * smooth
-#     return loss
-#
-#
-# def dice_coef(y_true, y_pred, smooth=1):
-#     intersection = tensorflow.keras.backend.sum(tensorflow.keras.backend.abs(y_true * y_pred), axis=-1)
-#     union = tensorflow.keras.backend.sum(tensorflow.keras.backend.abs(y_true), -1) + tensorflow.keras.backend.sum(
-#         tensorflow.keras.backend.abs(y_pred), -1)
-#     return (2. * intersection + smooth) / (union + smooth)
-
-
 @dataclasses.dataclass
 class Metrics:
     dice_test: float

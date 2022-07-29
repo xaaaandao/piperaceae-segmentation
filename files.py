@@ -1,6 +1,4 @@
 import datetime
-import sys
-
 import numpy
 import os
 import pathlib
@@ -116,7 +114,6 @@ def predict_and_save(cfg, model, path, x, y):
         save_image(f"{file.stem}+mask_unet.png", mask_unet, p)
         save_image(f"{file.stem}+img+mask_original.png", image_with_mask_original, p)
         save_image(f"{file.stem}+img+mask_unet.png", skimage.img_as_ubyte(image_with_mask_unet), p)
-        sys.exit()
 
 
 def save_figs(cfg, model, path, x_test, x_train, x_val, y_test, y_train, y_val):
