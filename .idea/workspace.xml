@@ -2,12 +2,71 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="487fcd5d-89e3-4bc5-aaf2-b821bb1b0061" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/files.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image.py" beforeDir="false" afterPath="$PROJECT_DIR$/image.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/116ottoniaHUEM000009830+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/116ottoniaHUEM000009830+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/117ottoniaHUEM000010115+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/117ottoniaHUEM000010115+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/141ottoniaUEC149318+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/141ottoniaUEC149318+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/149ottoniaVIC005937+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/149ottoniaVIC005937+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/14manekiaFURB37079+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/14manekiaFURB37079+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/151peperomiaALCB002267+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/151peperomiaALCB002267+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/157peperomiaALCB002273+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/157peperomiaALCB002273+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/158peperomiaALCB002274+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/158peperomiaALCB002274+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/162peperomiaALCB002278+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/162peperomiaALCB002278+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/167peperomiaALCB002282_2+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/167peperomiaALCB002282_2+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/16manekiaFURB37081+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/16manekiaFURB37081+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/173peperomiaALCB002288+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/173peperomiaALCB002288+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/175peperomiaALCB002290+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/175peperomiaALCB002290+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/176peperomiaALCB002291+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/176peperomiaALCB002291+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/177peperomiaALCB002292+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/177peperomiaALCB002292+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/188peperomiaESA037535+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/188peperomiaESA037535+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/190peperomiaESA124017+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/190peperomiaESA124017+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/192peperomiaFURB37277+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/192peperomiaFURB37277+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/193peperomiaFURB37688+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/193peperomiaFURB37688+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/194peperomiaFURB38392+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/194peperomiaFURB38392+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/19manekiaFURB49580+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/19manekiaFURB49580+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/209peperomiaNL-U1480944+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/209peperomiaNL-U1480944+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/218peperomiaSPF00015309+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/218peperomiaSPF00015309+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/226piperALCB002450_1+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/226piperALCB002450_1+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/227piperALCB002451+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/227piperALCB002451+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/231piperALCB002455+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/231piperALCB002455+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/236piperALCB002460+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/236piperALCB002460+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/240piperALCB002464+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/240piperALCB002464+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/241piperALCB002465+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/241piperALCB002465+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/242piperALCB002466+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/242piperALCB002466+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/245piperALCB002469+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/245piperALCB002469+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/246piperALCB002470+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/246piperALCB002470+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/247piperALCB002471+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/247piperALCB002471+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/249piperALCB002473+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/249piperALCB002473+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/253piperALCB002477+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/253piperALCB002477+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/260piperCEN00059993+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/260piperCEN00059993+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/261piperCEN00075963+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/261piperCEN00075963+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/269piperFURB37961+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/269piperFURB37961+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/27manekiaMBM089706+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/27manekiaMBM089706+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/284piperMBM074334+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/284piperMBM074334+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/286piperMBM152362+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/286piperMBM152362+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/287piperMBM261435+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/287piperMBM261435+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/296piperSPF00187349+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/296piperSPF00187349+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/299piperUEC150029+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/299piperUEC150029+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/317pothomorpheNL-L1537987+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/317pothomorpheNL-L1537987+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/319pothomorpheNL-L1537989+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/319pothomorpheNL-L1537989+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/321pothomorpheNL-L1538039+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/321pothomorpheNL-L1538039+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/328pothomorpheNL-U1478407+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/328pothomorpheNL-U1478407+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/32manekiaMBM196294+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/32manekiaMBM196294+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/361pothomorpheNY00557363_01+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/361pothomorpheNY00557363_01+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/40manekiaNY04113419_01+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/40manekiaNY04113419_01+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/41manekiaNY04113421_01+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/41manekiaNY04113421_01+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/46manekiaP00603889_01+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/46manekiaP00603889_01+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/50manekiaSPF00100458+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/50manekiaSPF00100458+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/52manekiaSPF00163161+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/52manekiaSPF00163161+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/53manekiaSPF00164665+contrast0_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/53manekiaSPF00164665+contrast0_2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/63manekiaV0489281F_01+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/63manekiaV0489281F_01+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/66manekiaV0489284F_01+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/66manekiaV0489284F_01+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/67manekiaV0489285F_01+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/67manekiaV0489285F_01+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/68manekiaV0489286F_01+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/68manekiaV0489286F_01+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/74manekiaV0489292F_01+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/74manekiaV0489292F_01+contrast0_2.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/images_contrast/84ottoniaESA017763+contrast0_2.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/images_contrast/84ottoniaESA017763+contrast0_2.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/preprocess.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/preprocess.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,18 +105,18 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_directory_selection": "C:/Users/xandao/PycharmProjects/piperaceae-segmentation",
-    "last_opened_file_path": "C:/Users/xandao/Documents/GitKraken/piperaceae-segmentation",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/xandao/PycharmProjects/piperaceae-segmentation&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/xandao/Documents/GitKraken/piperaceae-segmentation&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\xandao\Documents\GitHub\piperaceae-segmentation" />
@@ -123,7 +182,8 @@
       <workItem from="1658776129384" duration="13000" />
       <workItem from="1658777134090" duration="24415000" />
       <workItem from="1658834998192" duration="2745000" />
-      <workItem from="1659095046775" duration="4927000" />
+      <workItem from="1659095046775" duration="5589000" />
+      <workItem from="1659127031746" duration="7581000" />
     </task>
     <servers />
   </component>
