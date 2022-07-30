@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="487fcd5d-89e3-4bc5-aaf2-b821bb1b0061" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots.py" beforeDir="false" afterPath="$PROJECT_DIR$/plots.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +55,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\xandao\Documents\GitKraken\piperaceae-segmentation" />
       <recent name="C:\Users\xandao\Documents\GitHub\piperaceae-segmentation" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -122,7 +122,7 @@
       <workItem from="1659095046775" duration="5589000" />
       <workItem from="1659127031746" duration="8980000" />
       <workItem from="1659173102374" duration="370000" />
-      <workItem from="1659181669509" duration="402000" />
+      <workItem from="1659181669509" duration="694000" />
     </task>
     <servers />
   </component>
