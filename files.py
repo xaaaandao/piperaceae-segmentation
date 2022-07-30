@@ -1,4 +1,6 @@
 import datetime
+import time
+
 import numpy
 import os
 import pathlib
@@ -29,11 +31,12 @@ def get_path_mean(cfg):
     return os.path.join(cfg["path_out"], get_format_time_to_filename())
 
 
-def create_outfile_each_fold(fold, metrics, path):
+def create_outfile_each_fold(elapsed_time, fold, metrics, path):
     filename = os.path.join(path, "out.txt")
     try:
         with open(filename, "w") as file:
-            file.write(f"fold: {fold}\n")
+            file.write(f"fold: {fold}, elapsed_time: {elapsed_time}\n")
+            print(f"fold: {fold}, elapsed_time: {elapsed_time}")
             file.write(f"dice_test: {getattr(metrics, 'dice_test')}, iou_test: {getattr(metrics, 'iou_test')}\n")
             file.write(f"dice_train: {getattr(metrics, 'dice_train')}, iou_train: {getattr(metrics, 'iou_train')}\n")
             file.write(f"dice_val: {getattr(metrics, 'dice_val')}, iou_val: {getattr(metrics, 'iou_val')}\n")
@@ -42,7 +45,8 @@ def create_outfile_each_fold(fold, metrics, path):
         raise SystemError(f"problems in file {e}")
 
 
-def create_outfile_mean(cfg, list_result, path):
+def create_outfile_mean(cfg, list_elapsed_time, list_result, path):
+    mean_elapsed_time = numpy.mean(list_elapsed_time)
     mean_dice_test = numpy.mean(numpy.array([getattr(l, "dice_test") for l in list_result]))
     std_dice_test = numpy.std(numpy.array([getattr(l, "dice_test") for l in list_result]))
     mean_dice_train = numpy.mean(numpy.array([getattr(l, "dice_train") for l in list_result]))
@@ -58,6 +62,8 @@ def create_outfile_mean(cfg, list_result, path):
     filename = os.path.join(path, "out.txt")
     try:
         with open(filename, "w") as file:
+            print(f"mean_elapsed_time: {time.strftime('%H:%M:%S', time.gmtime(mean_elapsed_time))} ({mean_elapsed_time})")
+            file.write(f"mean_elapsed_time: {time.strftime('%H:%M:%S', time.gmtime(mean_elapsed_time))} ({mean_elapsed_time})\n")
             file.write(f"mean_dice_test: {mean_dice_test}, std_dice_test: {std_dice_test}\n")
             file.write(f"mean_dice_train: {mean_dice_train}, std_dice_train: {std_dice_train}\n")
             file.write(f"mean_dice_val: {mean_dice_val}, std_dice_val: {std_dice_val}\n")
@@ -124,5 +130,5 @@ def save_figs(cfg, model, path, x_test, x_train, x_val, y_test, y_train, y_val):
     path_val = os.path.join(path, "val")
     pathlib.Path(path_val).mkdir(parents=True, exist_ok=True)
     predict_and_save(cfg, model, path_test, x_test, y_test)
-    # predict_and_save(cfg, model, path_train, x_train, y_train)
-    # predict_and_save(cfg, model, path_val, x_val, y_val)
+    predict_and_save(cfg, model, path_train, x_train, y_train)
+    predict_and_save(cfg, model, path_val, x_val, y_val)
