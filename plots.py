@@ -3,6 +3,7 @@ import matplotlib.pyplot
 
 def plot_lossgraph(model):
     figure, axis = matplotlib.pyplot.subplots(1, figsize=(10, 10))
+    matplotlib.pyplot.ioff()
     axis.plot(model.history["loss"], label="Train")
     axis.plot(model.history["val_loss"], label="Validation")
     axis.plot(model.history["lr"], label="Learning rate")
@@ -10,4 +11,7 @@ def plot_lossgraph(model):
     axis.set_ylabel("Loss", fontsize=16)
     axis.set_xlabel("Epoch", fontsize=16)
     axis.legend()
+    matplotlib.pyplot.cla()
+    matplotlib.pyplot.clf()
+    matplotlib.pyplot.close()
     return figure
