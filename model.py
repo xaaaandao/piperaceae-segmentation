@@ -9,7 +9,7 @@ from albumentations import (
     Compose, HorizontalFlip, ShiftScaleRotate, ElasticTransform,
     RandomBrightness, RandomContrast, RandomGamma,
 )
-from metrics import dice_loss, jaccard_distance_loss
+from metrics import dice_loss, jaccard_distance_loss, dice_coef, jaccard_distance
 from files import save_fit_history, save_lossgraph
 
 
@@ -41,10 +41,9 @@ def train_model(cfg, checkpointer, fold, path, reduce_learning_rate, steps_per_e
     with strategy.scope():
         model = unet_model()
         adam_opt = tensorflow.keras.optimizers.Adam(learning_rate=cfg["learning_rate"])
-        model.compile(optimizer=adam_opt, loss=jaccard_distance_loss, metrics=[dice_loss])
+        model.compile(optimizer=adam_opt, loss=jaccard_distance_loss, metrics=[dice_coef, jaccard_distance])
 
     tensorflow.keras.backend.clear_session()
-
     start_time = time.time()
     fit = model.fit(train_generator,
                     steps_per_epoch=steps_per_epoch,
@@ -57,7 +56,6 @@ def train_model(cfg, checkpointer, fold, path, reduce_learning_rate, steps_per_e
 
     save_fit_history(fold, fit, path)
     save_lossgraph(fold, fit, path)
-
     return elapsed_time, model
 
 

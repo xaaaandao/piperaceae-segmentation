@@ -12,7 +12,7 @@ from plots import plot_lossgraph
 
 
 def load_mask(filename):
-    return numpy.float32(skimage.io.imread(filename) / 255)
+    return numpy.float32(skimage.io.imread(filename)) > 200
 
 
 def load_image(filename):
@@ -36,10 +36,13 @@ def create_outfile_each_fold(elapsed_time, fold, metrics, path):
     try:
         with open(filename, "w") as file:
             file.write(f"fold: {fold}, elapsed_time: {elapsed_time}\n")
-            print(f"fold: {fold}, elapsed_time: {elapsed_time}")
-            file.write(f"dice_test: {getattr(metrics, 'dice_test')}, iou_test: {getattr(metrics, 'iou_test')}\n")
-            file.write(f"dice_train: {getattr(metrics, 'dice_train')}, iou_train: {getattr(metrics, 'iou_train')}\n")
-            file.write(f"dice_val: {getattr(metrics, 'dice_val')}, iou_val: {getattr(metrics, 'iou_val')}\n")
+            print(f"fold: {fold}, elapsed_time: {time.strftime('%H:%M:%S', time.gmtime(elapsed_time))}")
+            file.write(f"loss_test: {getattr(metrics, 'loss_test')}\n")
+            file.write(f"loss_train: {getattr(metrics, 'loss_train')}\n")
+            file.write(f"loss_val: {getattr(metrics, 'loss_val')}\n")
+            file.write(f"dice_test: {getattr(metrics, 'dice_test')}, jaccard_test: {getattr(metrics, 'jaccard_test')}\n")
+            file.write(f"dice_train: {getattr(metrics, 'dice_train')}, jaccard_train: {getattr(metrics, 'jaccard_train')}\n")
+            file.write(f"dice_val: {getattr(metrics, 'dice_val')}, jaccard_val: {getattr(metrics, 'jaccard_val')}\n")
             file.close()
     except Exception as e:
         raise SystemError(f"problems in file {e}")
@@ -53,12 +56,18 @@ def create_outfile_mean(cfg, list_elapsed_time, list_result, path):
     std_dice_train = numpy.std(numpy.array([getattr(l, "dice_train") for l in list_result]))
     mean_dice_val = numpy.mean(numpy.array([getattr(l, "dice_val") for l in list_result]))
     std_dice_val = numpy.std(numpy.array([getattr(l, "dice_val") for l in list_result]))
-    mean_iou_test = numpy.mean(numpy.array([getattr(l, "iou_test") for l in list_result]))
-    std_iou_test = numpy.std(numpy.array([getattr(l, "iou_test") for l in list_result]))
-    mean_iou_train = numpy.mean(numpy.array([getattr(l, "iou_train") for l in list_result]))
-    std_iou_train = numpy.std(numpy.array([getattr(l, "iou_train") for l in list_result]))
-    mean_iou_val = numpy.mean(numpy.array([getattr(l, "iou_val") for l in list_result]))
-    std_iou_val = numpy.std(numpy.array([getattr(l, "iou_val") for l in list_result]))
+    mean_jaccard_test = numpy.mean(numpy.array([getattr(l, "jaccard_test") for l in list_result]))
+    std_jaccard_test = numpy.std(numpy.array([getattr(l, "jaccard_test") for l in list_result]))
+    mean_jaccard_train = numpy.mean(numpy.array([getattr(l, "jaccard_train") for l in list_result]))
+    std_jaccard_train = numpy.std(numpy.array([getattr(l, "jaccard_train") for l in list_result]))
+    mean_jaccard_val = numpy.mean(numpy.array([getattr(l, "jaccard_val") for l in list_result]))
+    std_jaccard_val = numpy.std(numpy.array([getattr(l, "jaccard_val") for l in list_result]))
+    mean_loss_test = numpy.mean(numpy.array([getattr(l, "loss_test") for l in list_result]))
+    std_loss_test = numpy.std(numpy.array([getattr(l, "loss_test") for l in list_result]))
+    mean_loss_train = numpy.mean(numpy.array([getattr(l, "loss_train") for l in list_result]))
+    std_loss_train = numpy.std(numpy.array([getattr(l, "loss_train") for l in list_result]))
+    mean_loss_val = numpy.mean(numpy.array([getattr(l, "loss_val") for l in list_result]))
+    std_loss_val = numpy.std(numpy.array([getattr(l, "loss_val") for l in list_result]))
     filename = os.path.join(path, "out.txt")
     try:
         with open(filename, "w") as file:
@@ -67,9 +76,12 @@ def create_outfile_mean(cfg, list_elapsed_time, list_result, path):
             file.write(f"mean_dice_test: {mean_dice_test}, std_dice_test: {std_dice_test}\n")
             file.write(f"mean_dice_train: {mean_dice_train}, std_dice_train: {std_dice_train}\n")
             file.write(f"mean_dice_val: {mean_dice_val}, std_dice_val: {std_dice_val}\n")
-            file.write(f"mean_iou_test: {mean_iou_test}, std_iou_test: {std_iou_test}\n")
-            file.write(f"mean_iou_train: {mean_iou_train}, std_iou_train: {std_iou_train}\n")
-            file.write(f"mean_iou_val: {mean_iou_val}, std_iou_val: {std_iou_val}\n")
+            file.write(f"mean_jaccard_test: {mean_jaccard_test}, std_jaccard_test: {std_jaccard_test}\n")
+            file.write(f"mean_jaccard_train: {mean_jaccard_train}, std_jaccard_train: {std_jaccard_train}\n")
+            file.write(f"mean_jaccard_val: {mean_jaccard_val}, std_jaccard_val: {std_jaccard_val}\n")
+            file.write(f"mean_loss_test: {mean_loss_test}, std_loss_test: {std_loss_test}\n")
+            file.write(f"mean_loss_train: {mean_loss_train}, std_loss_train: {std_loss_train}\n")
+            file.write(f"mean_loss_val: {mean_loss_val}, std_loss_val: {std_loss_val}\n")
             file.close()
     except Exception as e:
         raise SystemError(f"problems in file {e}")
@@ -88,9 +100,9 @@ def save_fit_history(fold, fit, path):
 
 def save_lossgraph(fold, model, path):
     filename = os.path.join(path, f"fold{fold}-lossgraph.png")
-    figure = plot_lossgraph(model)
+    plot_lossgraph(filename, model)
     print(f"{filename} created")
-    figure.savefig(filename)
+    # figure.savefig(filename)
 
 
 def save_image(filename, image, path):
