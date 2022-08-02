@@ -41,7 +41,7 @@ def train_model(cfg, checkpointer, fold, path, reduce_learning_rate, steps_per_e
     with strategy.scope():
         model = unet_model()
         adam_opt = tensorflow.keras.optimizers.Adam(learning_rate=cfg["learning_rate"])
-        model.compile(optimizer=adam_opt, loss=jaccard_distance_loss, metrics=[dice_coef, jaccard_distance])
+        model.compile(optimizer=adam_opt, loss=jaccard_distance_loss, metrics=[dice_coef, jaccard_distance, tensorflow.keras.metrics.Precision(), tensorflow.keras.metrics.Recall()])
 
     tensorflow.keras.backend.clear_session()
     start_time = time.time()

@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="487fcd5d-89e3-4bc5-aaf2-b821bb1b0061" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/files.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +51,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/xandao/PycharmProjects/piperaceae-segmentation&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/xandao/Documents/GitKraken/piperaceae-segmentation&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/xandao/Documents/GitKraken/piperaceae-sql&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable&quot;
@@ -124,6 +128,12 @@
       <workItem from="1659173102374" duration="370000" />
       <workItem from="1659181669509" duration="694000" />
       <workItem from="1659183119814" duration="1736000" />
+      <workItem from="1659354196009" duration="88000" />
+      <workItem from="1659355214217" duration="2595000" />
+      <workItem from="1659360708875" duration="26000" />
+      <workItem from="1659442061191" duration="1250000" />
+      <workItem from="1659445559724" duration="648000" />
+      <workItem from="1659468471985" duration="2932000" />
     </task>
     <servers />
   </component>

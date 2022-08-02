@@ -12,7 +12,7 @@ from plots import plot_lossgraph
 
 
 def load_mask(filename):
-    return numpy.float32(skimage.io.imread(filename)) > 200
+    return numpy.float32(skimage.io.imread(filename)/255)
 
 
 def load_image(filename):
@@ -36,13 +36,20 @@ def create_outfile_each_fold(elapsed_time, fold, metrics, path):
     try:
         with open(filename, "w") as file:
             file.write(f"fold: {fold}, elapsed_time: {elapsed_time}\n")
+            file.write(f"============================================================\n")
             print(f"fold: {fold}, elapsed_time: {time.strftime('%H:%M:%S', time.gmtime(elapsed_time))}")
-            file.write(f"loss_test: {getattr(metrics, 'loss_test')}\n")
-            file.write(f"loss_train: {getattr(metrics, 'loss_train')}\n")
-            file.write(f"loss_val: {getattr(metrics, 'loss_val')}\n")
-            file.write(f"dice_test: {getattr(metrics, 'dice_test')}, jaccard_test: {getattr(metrics, 'jaccard_test')}\n")
-            file.write(f"dice_train: {getattr(metrics, 'dice_train')}, jaccard_train: {getattr(metrics, 'jaccard_train')}\n")
-            file.write(f"dice_val: {getattr(metrics, 'dice_val')}, jaccard_val: {getattr(metrics, 'jaccard_val')}\n")
+            file.write(f"loss_test: {str(getattr(metrics, 'loss_test').replace('.', ''))}\n")
+            file.write(f"loss_train: {str(getattr(metrics, 'loss_train').replace('.', ''))}\n")
+            file.write(f"loss_val: {str(getattr(metrics, 'loss_val').replace('.', ''))}\n")
+            file.write(f"============================================================\n")
+            file.write(f"dice_test: {str(getattr(metrics, 'dice_test').replace('.', ''))}, jaccard_test: {str(getattr(metrics, 'jaccard_test').replace('.', ''))}\n")
+            file.write(f"precision_test: {str(getattr(metrics, 'precision_test').replace('.', ''))}, recall_test: {str(getattr(metrics, 'recall_test').replace('.', ''))}\n")
+            file.write(f"============================================================\n")
+            file.write(f"dice_train: {str(getattr(metrics, 'dice_train').replace('.', ''))}, jaccard_train: {str(getattr(metrics, 'jaccard_train').replace('.', ''))}\n")
+            file.write(f"precision_train: {str(getattr(metrics, 'precision_train').replace('.', ''))}, recall_train: {str(getattr(metrics, 'recall_train').replace('.', ''))}\n")
+            file.write(f"============================================================\n")
+            file.write(f"dice_val: {str(getattr(metrics, 'dice_val').replace('.', ''))}, jaccard_val: {str(getattr(metrics, 'jaccard_val').replace('.', ''))}\n")
+            file.write(f"precision_val: {str(getattr(metrics, 'precision_val').replace('.', ''))}, recall_val: {str(getattr(metrics, 'recall_val').replace('.', ''))}\n")
             file.close()
     except Exception as e:
         raise SystemError(f"problems in file {e}")
@@ -68,17 +75,41 @@ def create_outfile_mean(cfg, list_elapsed_time, list_result, path):
     std_loss_train = numpy.std(numpy.array([getattr(l, "loss_train") for l in list_result]))
     mean_loss_val = numpy.mean(numpy.array([getattr(l, "loss_val") for l in list_result]))
     std_loss_val = numpy.std(numpy.array([getattr(l, "loss_val") for l in list_result]))
+    mean_precision_test = numpy.mean(numpy.array([getattr(l, "precision_test") for l in list_result]))
+    std_precision_test = numpy.std(numpy.array([getattr(l, "precision_test") for l in list_result]))
+    mean_precision_train = numpy.mean(numpy.array([getattr(l, "precision_train") for l in list_result]))
+    std_precision_train = numpy.std(numpy.array([getattr(l, "precision_train") for l in list_result]))
+    mean_precision_val = numpy.mean(numpy.array([getattr(l, "precision_val") for l in list_result]))
+    std_precision_val = numpy.std(numpy.array([getattr(l, "precision_val") for l in list_result]))
+    mean_recall_test = numpy.mean(numpy.array([getattr(l, "recall_test") for l in list_result]))
+    std_recall_test = numpy.std(numpy.array([getattr(l, "recall_test") for l in list_result]))
+    mean_recall_train = numpy.mean(numpy.array([getattr(l, "recall_train") for l in list_result]))
+    std_recall_train = numpy.std(numpy.array([getattr(l, "recall_train") for l in list_result]))
+    mean_recall_val = numpy.mean(numpy.array([getattr(l, "recall_val") for l in list_result]))
+    std_recall_val = numpy.std(numpy.array([getattr(l, "recall_val") for l in list_result]))
     filename = os.path.join(path, "out.txt")
     try:
         with open(filename, "w") as file:
             print(f"mean_elapsed_time: {time.strftime('%H:%M:%S', time.gmtime(mean_elapsed_time))} ({mean_elapsed_time})")
+            file.write(f"batch_size: {cfg['batch_size']}, epochs: {cfg['epochs']}, learning_rate: {cfg['learning_rate']}\n")
+            file.write(f"============================================================\n")
             file.write(f"mean_elapsed_time: {time.strftime('%H:%M:%S', time.gmtime(mean_elapsed_time))} ({mean_elapsed_time})\n")
             file.write(f"mean_dice_test: {mean_dice_test}, std_dice_test: {std_dice_test}\n")
             file.write(f"mean_dice_train: {mean_dice_train}, std_dice_train: {std_dice_train}\n")
             file.write(f"mean_dice_val: {mean_dice_val}, std_dice_val: {std_dice_val}\n")
+            file.write(f"============================================================\n")
             file.write(f"mean_jaccard_test: {mean_jaccard_test}, std_jaccard_test: {std_jaccard_test}\n")
             file.write(f"mean_jaccard_train: {mean_jaccard_train}, std_jaccard_train: {std_jaccard_train}\n")
             file.write(f"mean_jaccard_val: {mean_jaccard_val}, std_jaccard_val: {std_jaccard_val}\n")
+            file.write(f"============================================================\n")
+            file.write(f"mean_precision_test: {mean_precision_test}, std_precision_test: {std_precision_test}\n")
+            file.write(f"mean_precision_train: {mean_precision_train}, std_precision_train: {std_precision_train}\n")
+            file.write(f"mean_precision_val: {mean_precision_val}, std_precision_val: {std_precision_val}\n")
+            file.write(f"============================================================\n")
+            file.write(f"mean_recall_test: {mean_recall_test}, std_recall_test: {std_recall_test}\n")
+            file.write(f"mean_recall_train: {mean_recall_train}, std_recall_train: {std_recall_train}\n")
+            file.write(f"mean_recall_val: {mean_recall_val}, std_recall_val: {std_recall_val}\n")
+            file.write(f"============================================================\n")
             file.write(f"mean_loss_test: {mean_loss_test}, std_loss_test: {std_loss_test}\n")
             file.write(f"mean_loss_train: {mean_loss_train}, std_loss_train: {std_loss_train}\n")
             file.write(f"mean_loss_val: {mean_loss_val}, std_loss_val: {std_loss_val}\n")
