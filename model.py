@@ -30,18 +30,21 @@ def cfg_model(cfg, fold, path, x_train, y_train):
     ])
     train_generator = AugmentationSequence(x_train, y_train, cfg["batch_size"], augment)
     model_filename = get_filename(cfg, fold, path, steps_per_epoch)
-    reduce_learning_rate = tensorflow.keras.callbacks.ReduceLROnPlateau(monitor="loss", factor=0.5, patience=3,
-                                                                        verbose=1)
-    checkpointer = tensorflow.keras.callbacks.ModelCheckpoint(model_filename, verbose=1, save_best_only=True)
+    reduce_learning_rate = tensorflow.keras.callbacks.ReduceLROnPlateau(monitor="loss", factor=0.5,
+                                                                        patience=3, verbose=1)
+    checkpointer = tensorflow.keras.callbacks.ModelCheckpoint(model_filename, verbose=1,
+                                                              save_best_only=True)
     strategy = tensorflow.distribute.MirroredStrategy()
     return checkpointer, reduce_learning_rate, steps_per_epoch, strategy, train_generator, model_filename
 
 
 def train_model(cfg, checkpointer, fold, path, reduce_learning_rate, steps_per_epoch, strategy, train_generator, x_val, y_val):
     with strategy.scope():
-        model = unet_model()
+        model = unet_model(cfg)
         adam_opt = tensorflow.keras.optimizers.Adam(learning_rate=cfg["learning_rate"])
-        model.compile(optimizer=adam_opt, loss=jaccard_distance_loss, metrics=[dice_coef, jaccard_distance, tensorflow.keras.metrics.Precision(), tensorflow.keras.metrics.Recall()])
+        model.compile(optimizer=adam_opt, loss=jaccard_distance_loss,
+                      metrics=[dice_coef, jaccard_distance, tensorflow.keras.metrics.Precision(),
+                               tensorflow.keras.metrics.Recall()])
 
     tensorflow.keras.backend.clear_session()
     start_time = time.time()
@@ -59,8 +62,8 @@ def train_model(cfg, checkpointer, fold, path, reduce_learning_rate, steps_per_e
     return elapsed_time, model
 
 
-def unet_model(keras=None, img_size=None):
-    input_img = tensorflow.keras.layers.Input((img_size, img_size, 1), name="img")
+def unet_model(cfg, keras=None, img_size=None):
+    input_img = tensorflow.keras.layers.Input((img_size, img_size, cfg["channel"]), name="img")
 
     # Contract #1
     c1 = tensorflow.keras.layers.Conv2D(16, (3, 3), kernel_initializer="he_uniform", padding="same")(input_img)

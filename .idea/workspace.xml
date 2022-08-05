@@ -4,6 +4,9 @@
     <list default="true" id="487fcd5d-89e3-4bc5-aaf2-b821bb1b0061" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/files.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +134,15 @@
       <workItem from="1659442061191" duration="1250000" />
       <workItem from="1659445559724" duration="648000" />
       <workItem from="1659468471985" duration="3365000" />
-      <workItem from="1659475184443" duration="59000" />
+      <workItem from="1659475184443" duration="660000" />
+      <workItem from="1659525209702" duration="995000" />
+      <workItem from="1659527947037" duration="102000" />
+      <workItem from="1659528150567" duration="644000" />
+      <workItem from="1659531376210" duration="197000" />
+      <workItem from="1659566975057" duration="262000" />
+      <workItem from="1659608683675" duration="1284000" />
+      <workItem from="1659634013095" duration="2835000" />
+      <workItem from="1659644406444" duration="8987000" />
     </task>
     <servers />
   </component>

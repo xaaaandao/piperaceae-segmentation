@@ -149,7 +149,7 @@ def predict_and_save(cfg, model, path, x, y):
         file = getattr(image["image"], "file")
         image_original = getattr(image["image"], "image")
         mask_original = getattr(image["mask"], "image")
-        image_original = image_original.reshape((1, cfg["image_size"], cfg["image_size"], 1))
+        image_original = image_original.reshape((1, cfg["image_size"], cfg["image_size"], cfg["channel"]))
         mask_original = mask_original.reshape((1, cfg["image_size"], cfg["image_size"], 1))
         mask_original = numpy.uint8(mask_original[0, :, :, 0] > 0.5)
 
