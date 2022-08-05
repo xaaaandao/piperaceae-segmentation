@@ -16,7 +16,7 @@ def load_mask(filename):
 
 
 def load_image(filename):
-    return skimage.img_as_float32(skimage.io.imread(filename))
+    return numpy.float32(skimage.io.imread(filename))
 
 
 def get_format_time_to_filename():
@@ -164,7 +164,7 @@ def predict_and_save(cfg, model, path, x, y):
         save_image(f"{file.stem}+img+mask_original.png", image_with_mask_original, p)
         save_image(f"{file.stem}+img+mask_unet.png", skimage.img_as_ubyte(image_with_mask_unet), p)
 
-
+# ave_figs(cfg, model, path_outfile_each_fold, x_test_o, x_train_o, x_val_o, y_test_o, y_train_o, y_val_o)
 def save_figs(cfg, model, path, x_test, x_train, x_val, y_test, y_train, y_val):
     path_test = os.path.join(path, "test")
     pathlib.Path(path_test).mkdir(parents=True, exist_ok=True)
