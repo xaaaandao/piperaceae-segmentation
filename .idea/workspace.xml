@@ -4,8 +4,6 @@
     <list default="true" id="487fcd5d-89e3-4bc5-aaf2-b821bb1b0061" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocess.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/preprocess.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +144,7 @@
       <workItem from="1659700885660" duration="6486000" />
       <workItem from="1659713214585" duration="9646000" />
       <workItem from="1659728890973" duration="14310000" />
-      <workItem from="1659784717977" duration="8184000" />
+      <workItem from="1659784717977" duration="11286000" />
     </task>
     <task id="LOCAL-00001" summary="Refatorando get_image">
       <created>1659715455847</created>
