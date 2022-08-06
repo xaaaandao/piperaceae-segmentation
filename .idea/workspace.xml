@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="487fcd5d-89e3-4bc5-aaf2-b821bb1b0061" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/files.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpu.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/metrics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots.py" beforeDir="false" />
-    </list>
+    <list default="true" id="487fcd5d-89e3-4bc5-aaf2-b821bb1b0061" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -150,7 +140,7 @@
       <workItem from="1659644406444" duration="9170000" />
       <workItem from="1659700885660" duration="6486000" />
       <workItem from="1659713214585" duration="9646000" />
-      <workItem from="1659728890973" duration="13572000" />
+      <workItem from="1659728890973" duration="14101000" />
     </task>
     <task id="LOCAL-00001" summary="Refatorando get_image">
       <created>1659715455847</created>
