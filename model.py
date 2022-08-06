@@ -1,6 +1,12 @@
 import tensorflow
 import time
 
+from metrics import dice_loss, jaccard_distance_loss
+
+
+def get_loss_function(loss_function):
+    return dice_loss if loss_function == "dice" else jaccard_distance_loss
+
 
 def evaluate(end_time, fold, model, x_train, x_val, x_test, y_train, y_val, y_test):
     loss_train, dice_train, jaccard_train, precision_train, recall_train = \
