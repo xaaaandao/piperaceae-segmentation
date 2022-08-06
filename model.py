@@ -1,69 +1,37 @@
-import cv2
-import math
-import os
 import tensorflow
 import time
 
-from AugmentationSequence import AugmentationSequence
-from albumentations import (
-    Compose, HorizontalFlip, ShiftScaleRotate, ElasticTransform,
-    RandomBrightness, RandomContrast, RandomGamma,
-)
-from metrics import dice_loss, jaccard_distance_loss, dice_coef, jaccard_distance
-from files import save_fit_history, save_lossgraph
+
+def evaluate(end_time, fold, model, x_train, x_val, x_test, y_train, y_val, y_test):
+    loss_train, dice_train, jaccard_train, precision_train, recall_train = \
+        model.evaluate(x_train, y_train, verbose=False)
+    loss_val, dice_val, jaccard_val, precision_val, recall_val = \
+        model.evaluate(x_val, y_val, verbose=False)
+    loss_test, dice_test, jaccard_test, precision_test, recall_test = \
+        model.evaluate(x_test, y_test, verbose=False)
+    return {
+        "fold": fold,
+        "time": str(time.strftime("%H:%M:%S", time.gmtime(end_time))),
+        "loss_train": loss_train,
+        "dice_train": dice_train,
+        "jaccard_train": jaccard_train,
+        "precision_train": precision_train,
+        "recall_train": recall_train,
+        "loss_val": loss_val,
+        "dice_val": dice_val,
+        "jaccard_val": jaccard_val,
+        "precision_val": precision_val,
+        "recall_val": recall_val,
+        "loss_test": loss_test,
+        "dice_test": dice_test,
+        "jaccard_test": jaccard_test,
+        "precision_test": precision_test,
+        "recall_test": recall_test
+    }
 
 
-def get_filename(cfg, fold, path, steps):
-    filename = f"batch{cfg['batch_size']}+lr{str(cfg['learning_rate']).replace('.', '_')}+epoch{str(cfg['epochs'])}+steps{steps}+fold{fold}+unet.h5"
-    return os.path.join(path, filename)
-
-
-def cfg_model(cfg, fold, path, x_train, y_train):
-    steps_per_epoch = math.ceil(x_train.shape[0] / cfg["batch_size"])
-    augment = Compose([
-        HorizontalFlip(),
-        ShiftScaleRotate(rotate_limit=45, border_mode=cv2.BORDER_CONSTANT),
-        ElasticTransform(border_mode=cv2.BORDER_CONSTANT),
-        RandomBrightness(),
-        RandomContrast(),
-        RandomGamma()
-    ])
-    train_generator = AugmentationSequence(x_train, y_train, cfg["batch_size"], augment)
-    model_filename = get_filename(cfg, fold, path, steps_per_epoch)
-    reduce_learning_rate = tensorflow.keras.callbacks.ReduceLROnPlateau(monitor="loss", factor=0.5,
-                                                                        patience=3, verbose=1)
-    checkpointer = tensorflow.keras.callbacks.ModelCheckpoint(model_filename, verbose=1,
-                                                              save_best_only=True)
-    strategy = tensorflow.distribute.MirroredStrategy()
-    return checkpointer, reduce_learning_rate, steps_per_epoch, strategy, train_generator, model_filename
-
-
-def train_model(cfg, checkpointer, fold, path, reduce_learning_rate, steps_per_epoch, strategy, train_generator, x_val, y_val):
-    with strategy.scope():
-        model = unet_model(cfg)
-        adam_opt = tensorflow.keras.optimizers.Adam(learning_rate=cfg["learning_rate"])
-        model.compile(optimizer=adam_opt, loss=jaccard_distance_loss,
-                      metrics=[dice_coef, jaccard_distance, tensorflow.keras.metrics.Precision(),
-                               tensorflow.keras.metrics.Recall()])
-
-    tensorflow.keras.backend.clear_session()
-    start_time = time.time()
-    fit = model.fit(train_generator,
-                    steps_per_epoch=steps_per_epoch,
-                    epochs=cfg["epochs"],
-                    validation_data=(x_val, y_val),
-                    callbacks=[checkpointer, reduce_learning_rate]
-                    )
-    elapsed_time = time.time() - start_time
-    print(f"time elapsed {time.strftime('%H:%M:%S', time.gmtime(elapsed_time))}")
-
-    save_fit_history(fold, fit, path)
-    save_lossgraph(fold, fit, path)
-    return elapsed_time, model
-
-
-def unet_model(cfg, keras=None, img_size=None):
-    input_img = tensorflow.keras.layers.Input((img_size, img_size, cfg["channel"]), name="img")
+def unet_model(cfg):
+    input_img = tensorflow.keras.layers.Input((cfg["image_size"], cfg["image_size"], cfg["channel"]), name="img")
 
     # Contract #1
     c1 = tensorflow.keras.layers.Conv2D(16, (3, 3), kernel_initializer="he_uniform", padding="same")(input_img)
