@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="487fcd5d-89e3-4bc5-aaf2-b821bb1b0061" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/files.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/main.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -144,7 +145,8 @@
       <workItem from="1659700885660" duration="6486000" />
       <workItem from="1659713214585" duration="9646000" />
       <workItem from="1659728890973" duration="14310000" />
-      <workItem from="1659784717977" duration="11286000" />
+      <workItem from="1659784717977" duration="13699000" />
+      <workItem from="1659828699775" duration="4506000" />
     </task>
     <task id="LOCAL-00001" summary="Refatorando get_image">
       <created>1659715455847</created>
