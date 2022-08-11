@@ -28,7 +28,6 @@ def save_figs(cfg, list_images_names, list_index, model, path, x):
             image_pred_mask = image_rgb(image, pred_mask)
         filename_image_pred_mask = list_images_names[index] + "w_pred_mask.png"
         skimage.io.imsave(os.path.join(path, filename_image_pred_mask), skimage.img_as_ubyte(image_pred_mask))
-        # break
 
 
 def image_rgb(image, pred_mask):
