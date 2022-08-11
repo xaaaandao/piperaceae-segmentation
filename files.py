@@ -21,10 +21,6 @@ def save_figs(cfg, list_images_names, list_index, model, path, x):
         pred_mask = numpy.uint8(x_pred >= 0.5)
         filename_pred_mask = list_images_names[index] + "mask_unet.png"
         skimage.io.imsave(os.path.join(path, filename_pred_mask), skimage.img_as_ubyte(pred_mask[0, :, :, 0] * 255))
-        #
-        # image_pred_mask = image_rgb(image, pred_mask)
-        # filename_image_pred_mask = list_images_names[index] + "w_pred_mask.png"
-        # skimage.io.imsave(os.path.join(path, filename_image_pred_mask), skimage.img_as_ubyte(image_pred_mask))
 
         if cfg["channel"] == 1:
             image_pred_mask = image_grayscale(image, pred_mask)
@@ -32,7 +28,7 @@ def save_figs(cfg, list_images_names, list_index, model, path, x):
             image_pred_mask = image_rgb(image, pred_mask)
         filename_image_pred_mask = list_images_names[index] + "w_pred_mask.png"
         skimage.io.imsave(os.path.join(path, filename_image_pred_mask), skimage.img_as_ubyte(image_pred_mask))
-        break
+        # break
 
 
 def image_rgb(image, pred_mask):
