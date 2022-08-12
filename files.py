@@ -17,38 +17,40 @@ def create_folder(list_path):
 
 
 def save_figs(cfg, list_images_names, list_index, model, path, x):
-    for index in list_index:
-        image = x[index, :, :, :]
-        image = image.reshape((1, cfg["image_size"], cfg["image_size"], cfg["channel"]))
-        x_pred = model.predict(image)[0, :, :, 0]
-        pred_mask = numpy.uint8(x_pred >= 0.5)
-        filename_pred_mask = list_images_names[index] + "mask_unet.png"
-        skimage.io.imsave(os.path.join(path, filename_pred_mask), skimage.img_as_ubyte(pred_mask * 255))
 
-        if cfg["channel"] == 1:
-            image_pred_mask = image_grayscale(list_images_names, image, index, path, pred_mask)
-        elif cfg["channel"] == 3:
-            image_pred_mask = image_rgb(image, pred_mask)
-        filename_image_pred_mask = list_images_names[index] + "w_pred_mask.png"
-        skimage.io.imsave(os.path.join(path, filename_image_pred_mask), skimage.img_as_ubyte(image_pred_mask))
+    for i, index in enumerate(list_index):
+        # print(x[index].shape)
+        if cfg["channel"] == 3:
+            save_image_rgb(cfg, list_images_names, x[index], index, model, path)
+        else:
+            save_image_rgb(cfg, list_images_names, x[index], index, model, path)
 
 
-def image_rgb(image, pred_mask):
-    image_pred_mask = image * pred_mask
-    image_pred_mask = image_pred_mask[0, :, :, :]  # reduz a dimensionalidade
-    image_pred_mask[image_pred_mask == 0] = 1
-    return image_pred_mask
+def save_image_rgb(cfg, list_images_names, image, index, model, path):
+    x_pred = model.predict(image.reshape((1, cfg["image_size"], cfg["image_size"], cfg["channel"])))
+    pred_mask = numpy.uint8(x_pred >= 0.5)
+    filename_pred_mask = list_images_names[index] + "mask_unet.png"
+    skimage.io.imsave(os.path.join(path, filename_pred_mask), skimage.img_as_ubyte(pred_mask[0, :, :, 0] * 255))
+
+    # print(x[index].shape)
+    image_segmented = image * pred_mask[0, :, :, :]
+    image_segmented[image_segmented == 0] = 1
+    filename_image_pred_mask = list_images_names[index] + "w_pred_mask.png"
+    skimage.io.imsave(os.path.join(path, filename_image_pred_mask), skimage.img_as_ubyte(image_segmented))
 
 
-def image_grayscale(list_images_names, image, index, path, pred_mask):
-    print(image.shape, pred_mask.shape)
-    print(image.dtype, pred_mask.dtype)
-    img_pred_mask = image[0, :, :, 0] * pred_mask
-    print(img_pred_mask.shape, img_pred_mask.dtype)
-    # img_pred_mask = numpy.uint8(img_pred_mask)
-    # img_pred_mask = img_pred_mask * 255
-    img_pred_mask[img_pred_mask == 0] = 1
-    return img_pred_mask
+def save_image_grayscale(cfg, list_images_names, image, index, model, path):
+    image = image.reshape((1, cfg["image_size"], cfg["image_size"], cfg["channel"]))
+    x_pred = model.predict(image)[0, :, :, 0]
+    pred_mask = numpy.uint8(x_pred >= 0.5)
+    filename_pred_mask = list_images_names[index] + "mask_unet.png"
+    skimage.io.imsave(os.path.join(path, filename_pred_mask), skimage.img_as_ubyte(pred_mask * 255))
+
+    img_segmented = image[0, :, :, 0] * pred_mask
+    img_segmented[img_segmented == 0] = 1
+    filename_image_pred_mask = list_images_names[index] + "w_pred_mask.png"
+    skimage.io.imsave(os.path.join(path, filename_image_pred_mask), skimage.img_as_ubyte(img_segmented))
+
 
 def save_fit_history(fold, fit, path):
     filename = os.path.join(path, f"fold{fold}-fit.pckl")
