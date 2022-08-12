@@ -1,5 +1,7 @@
 import datetime
 import time
+
+import PIL.ImageShow
 import matplotlib.pyplot
 import numpy
 import os
@@ -17,13 +19,14 @@ def create_folder(list_path):
 def save_figs(cfg, list_images_names, list_index, model, path, x):
     for index in list_index:
         image = x[index, :, :, :]
-        x_pred = model.predict(image.reshape((1, cfg["image_size"], cfg["image_size"], cfg["channel"])))
+        image = image.reshape((1, cfg["image_size"], cfg["image_size"], cfg["channel"]))
+        x_pred = model.predict(image)[0, :, :, 0]
         pred_mask = numpy.uint8(x_pred >= 0.5)
         filename_pred_mask = list_images_names[index] + "mask_unet.png"
-        skimage.io.imsave(os.path.join(path, filename_pred_mask), skimage.img_as_ubyte(pred_mask[0, :, :, 0] * 255))
+        skimage.io.imsave(os.path.join(path, filename_pred_mask), skimage.img_as_ubyte(pred_mask * 255))
 
         if cfg["channel"] == 1:
-            image_pred_mask = image_grayscale(image, pred_mask)
+            image_pred_mask = image_grayscale(list_images_names, image, index, path, pred_mask)
         elif cfg["channel"] == 3:
             image_pred_mask = image_rgb(image, pred_mask)
         filename_image_pred_mask = list_images_names[index] + "w_pred_mask.png"
@@ -37,13 +40,15 @@ def image_rgb(image, pred_mask):
     return image_pred_mask
 
 
-def image_grayscale(image, pred_mask):
-    image_pred_mask = numpy.uint8(image) * pred_mask
-    image_pred_mask = image_pred_mask[0, :, :, :]
-    image_pred_mask[image_pred_mask == 0] = 1
-    image_pred_mask = image_pred_mask * 255
-    return image_pred_mask
-
+def image_grayscale(list_images_names, image, index, path, pred_mask):
+    print(image.shape, pred_mask.shape)
+    print(image.dtype, pred_mask.dtype)
+    img_pred_mask = image[0, :, :, 0] * pred_mask
+    print(img_pred_mask.shape, img_pred_mask.dtype)
+    # img_pred_mask = numpy.uint8(img_pred_mask)
+    # img_pred_mask = img_pred_mask * 255
+    img_pred_mask[img_pred_mask == 0] = 1
+    return img_pred_mask
 
 def save_fit_history(fold, fit, path):
     filename = os.path.join(path, f"fold{fold}-fit.pckl")
