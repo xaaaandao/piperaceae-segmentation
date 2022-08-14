@@ -1,6 +1,7 @@
+copy/
+dataset/
 out/
 result/
-dataset/
 *.jpeg
 *.png
 *.jpg
