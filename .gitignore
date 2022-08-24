@@ -1,7 +1,7 @@
 copy/
 dataset/
 out/
-result/
+resultados/
 *.jpeg
 *.png
 *.jpg
