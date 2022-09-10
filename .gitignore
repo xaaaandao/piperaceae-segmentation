@@ -1,6 +1,7 @@
 copy/
 dataset/
 out/
+predict/
 resultados/
 *.jpeg
 *.png
