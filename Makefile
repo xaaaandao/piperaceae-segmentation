@@ -1,4 +1,4 @@
 convert:
-	jupyter nbconvert main.ipynb --to python
+	jupyter nbconvert *.ipynb --to python
 
 
