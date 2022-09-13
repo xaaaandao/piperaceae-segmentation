@@ -3,6 +3,7 @@ dataset/
 out/
 predict/
 resultados/
+resultados_data_augmentation/
 *.jpeg
 *.png
 *.jpg
