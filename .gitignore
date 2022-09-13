@@ -1,12 +1,2 @@
-copy/
-dataset/
-out/
-predict/
-resultados/
-resultados_data_augmentation/
-*.jpeg
-*.png
-*.jpg
-*.zip
-*.rar
-*.h5
+*/*
+*.*
