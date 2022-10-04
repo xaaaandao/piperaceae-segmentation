@@ -17,10 +17,10 @@ def create_folder(list_path):
 
 
 def save_figs(cfg, list_images_names, list_index, model, path, x):
-
+    for p in ['mask_unet', 'w_pred_mask']:
+        pathlib.Path(os.path.join(path, p)).mkdir(parents=True, exist_ok=True)
     for i, index in enumerate(list_index):
-        # print(x[index].shape)
-        if cfg["channel"] == 3:
+        if cfg['channel'] == 3:
             save_image_rgb(cfg, list_images_names, x[index], index, model, path)
         else:
             save_image_rgb(cfg, list_images_names, x[index], index, model, path)
@@ -30,13 +30,13 @@ def save_image_rgb(cfg, list_images_names, image, index, model, path):
     x_pred = model.predict(image.reshape((1, cfg["image_size"], cfg["image_size"], cfg["channel"])))
     pred_mask = numpy.uint8(x_pred >= 0.5)
     filename_pred_mask = list_images_names[index] + "mask_unet.png"
-    skimage.io.imsave(os.path.join(path, filename_pred_mask), skimage.img_as_ubyte(pred_mask[0, :, :, 0] * 255))
+    skimage.io.imsave(os.path.join(path, 'mask_unet', filename_pred_mask), skimage.img_as_ubyte(pred_mask[0, :, :, 0] * 255))
 
     # print(x[index].shape)
     image_segmented = image * pred_mask[0, :, :, :]
     image_segmented[image_segmented == 0] = 1
     filename_image_pred_mask = list_images_names[index] + "w_pred_mask.png"
-    skimage.io.imsave(os.path.join(path, filename_image_pred_mask), skimage.img_as_ubyte(image_segmented))
+    skimage.io.imsave(os.path.join(path, 'w_pred_mask', filename_image_pred_mask), skimage.img_as_ubyte(image_segmented))
 
 
 def save_image_grayscale(cfg, list_images_names, image, index, model, path):
@@ -44,12 +44,12 @@ def save_image_grayscale(cfg, list_images_names, image, index, model, path):
     x_pred = model.predict(image)[0, :, :, 0]
     pred_mask = numpy.uint8(x_pred >= 0.5)
     filename_pred_mask = list_images_names[index] + "mask_unet.png"
-    skimage.io.imsave(os.path.join(path, filename_pred_mask), skimage.img_as_ubyte(pred_mask * 255))
+    skimage.io.imsave(os.path.join(path, 'mask_unet', filename_pred_mask), skimage.img_as_ubyte(pred_mask * 255))
 
     img_segmented = image[0, :, :, 0] * pred_mask
     img_segmented[img_segmented == 0] = 1
     filename_image_pred_mask = list_images_names[index] + "w_pred_mask.png"
-    skimage.io.imsave(os.path.join(path, filename_image_pred_mask), skimage.img_as_ubyte(img_segmented))
+    skimage.io.imsave(os.path.join(path, 'w_pred_mask', filename_image_pred_mask), skimage.img_as_ubyte(img_segmented))
 
 
 def save_fit_history(fold, fit, path):
