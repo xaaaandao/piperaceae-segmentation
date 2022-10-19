@@ -6,6 +6,7 @@ import pickle
 import skimage
 import tensorflow as tf
 
+from PIL import Image
 
 def create_folder(list_path):
     for path in list_path:
@@ -29,7 +30,10 @@ def save_figs(cfg, list_images_names, list_index, model, path, x):
         tf.keras.preprocessing.image.save_img(new_filename, mask)
 
         mask = tf.keras.preprocessing.image.array_to_img(mask).convert('L')
-        image_original = image_original.convert('RGBA')
+        if cfg['channel'] == 1:
+            image_original = image_original.convert('L')
+        else:
+            image_original = image_original.convert('RGBA')
         new_filename = os.path.join(path, 'transparency', filename + '_transparente.png')
         image_original.putalpha(mask)
         image_original.save(new_filename)
