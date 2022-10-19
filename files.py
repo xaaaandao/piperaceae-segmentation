@@ -13,39 +13,34 @@ def create_folder(list_path):
 
 
 def save_figs(cfg, list_images_names, list_index, model, path, x):
-    for p in ['mask_unet', 'w_pred_mask']:
+    for p in ['mask_unet', 'w_pred_mask', 'transparency']:
         pathlib.Path(os.path.join(path, p)).mkdir(parents=True, exist_ok=True)
 
     for i, index in enumerate(list_index):
         filename = list_images_names[index]
-        # image = x[index] / 255
-        image = x[index].reshape((1, cfg['image_size'], cfg['image_size'], cfg['channel']))
+        image_original = x[index]
+        image = tf.keras.preprocessing.image.img_to_array(image_original)
+        image = image / 255
+        image = image.reshape((1, cfg['image_size'], cfg['image_size'], cfg['channel']))
         mask = model.predict(image)
         mask = mask[0, :, :, :]
         new_filename = os.path.join(path, 'mask_unet', filename + '.bmp')
         print(new_filename, mask.shape)
         tf.keras.preprocessing.image.save_img(new_filename, mask)
 
-        mask = np.uint8(mask >= 0.5)
-        image_segmented = image * mask
-        image_segmented[image_segmented == 0] = 1
-        image_segmented = image_segmented[0, :, :, :]
-        image_segmented = tf.keras.preprocessing.image.array_to_img(image_segmented)
+        mask = tf.keras.preprocessing.image.array_to_img(mask).convert('L')
+        image_original = image_original.convert('RGBA')
+        new_filename = os.path.join(path, 'transparency', filename + '_transparente.png')
+        image_original.putalpha(mask)
+        image_original.save(new_filename)
+
+        background = Image.new('RGBA', (cfg['image_size'], cfg['image_size']), "WHITE")
+        img_w, img_h = image_original.size
+        bg_w, bg_h = background.size
+        offset = ((bg_w - img_w) // 2, (bg_h - img_h) // 2)
+        background.paste(image_original, offset, image_original)
         new_filename = os.path.join(path, 'w_pred_mask', filename + '.png')
-        tf.keras.preprocessing.image.save_img(new_filename, image_segmented)
-    #     if cfg['channel'] == 3:
-    #         save_image_rgb(cfg, list_images_names, x[index], index, model, path)
-    #     else:
-    #         save_image_rgb(cfg, list_images_names, x[index], index, model, path)
-
-
-
-    # print(x[index].shape)
-    # image_segmented = image * pred_mask[0, :, :, :]
-    # image_segmented[image_segmented == 0] = 1
-    # filename_image_pred_mask = list_images_names[index] + 'w_pred_mask.png'
-    # skimage.io.imsave(os.path.join(path, 'w_pred_mask', filename_image_pred_mask), skimage.img_as_ubyte(image_segmented))
-
+        background.save(new_filename)
 
 def save_image_grayscale(cfg, list_images_names, image, index, model, path):
     image = image.reshape((1, cfg['image_size'], cfg['image_size'], cfg['channel']))
