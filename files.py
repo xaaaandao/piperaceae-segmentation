@@ -27,12 +27,12 @@ def save_figs(cfg, list_images_names, list_index, model, path, x):
 
         mask = tf.keras.preprocessing.image.array_to_img(mask).convert('L')
         image = tf.keras.preprocessing.image.array_to_img(x[index])
-        image_original = image.convert('RGBA')
+        image_original = image.convert('L')
         new_filename = os.path.join(path, 'transparency', str(list_images_names[index].stem) + '_transparente.png')
         image_original.putalpha(mask)
         image_original.save(new_filename)
 
-        background = Image.new('RGBA', (cfg['image_size'], cfg['image_size']), "WHITE")
+        background = Image.new('L', (cfg['image_size'], cfg['image_size']), "WHITE")
         img_w, img_h = image_original.size
         bg_w, bg_h = background.size
         offset = ((bg_w - img_w) // 2, (bg_h - img_h) // 2)
