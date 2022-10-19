@@ -18,10 +18,8 @@ def save_figs(cfg, list_images_names, list_index, model, path, x):
         pathlib.Path(os.path.join(path, p)).mkdir(parents=True, exist_ok=True)
 
     for i, index in enumerate(list_index):
-        filename = list_images_names[index]
-        image_original = x[index]
-        image = tf.keras.preprocessing.image.img_to_array(image_original)
-        image = image / 255
+        filename = str(list_images_names[index].stem)
+        image = x[index]/255
         image = image.reshape((1, cfg['image_size'], cfg['image_size'], cfg['channel']))
         mask = model.predict(image)
         mask = mask[0, :, :, :]
@@ -30,6 +28,7 @@ def save_figs(cfg, list_images_names, list_index, model, path, x):
         tf.keras.preprocessing.image.save_img(new_filename, mask)
 
         mask = tf.keras.preprocessing.image.array_to_img(mask).convert('L')
+        image_original = tf.keras.preprocessing.image.load_img(list_images_names[index].resolve())
         if cfg['channel'] == 1:
             image_original = image_original.convert('L')
         else:
