@@ -19,8 +19,8 @@ def save_figs(cfg, list_images_names, list_index, model, path, x):
 
     for i, index in enumerate(list_index):
         filename = str(list_images_names[index].stem)
-        image = x[index]/255
-        image = image.reshape((1, cfg['image_size'], cfg['image_size'], cfg['channel']))
+        # image = x[index]/255
+        image = x[index].reshape((1, cfg['image_size'], cfg['image_size'], cfg['channel']))
         mask = model.predict(image)
         mask = mask[0, :, :, :]
         new_filename = os.path.join(path, 'mask_unet', filename + '.bmp')
@@ -29,12 +29,13 @@ def save_figs(cfg, list_images_names, list_index, model, path, x):
 
         mask = tf.keras.preprocessing.image.array_to_img(mask).convert('L')
         image_original = tf.keras.preprocessing.image.load_img(list_images_names[index].resolve())
-        image_original = image_original.convert('RGBA')
+        image_original = image_original.convert('L')
+        image_original_transparente = image_original.copy()
         new_filename = os.path.join(path, 'transparency', filename + '_transparente.png')
-        image_original.putalpha(mask)
-        image_original.save(new_filename)
+        image_original_transparente.putalpha(mask)
+        image_original_transparente.save(new_filename)
 
-        background = Image.new('RGBA', (cfg['image_size'], cfg['image_size']), "WHITE")
+        background = Image.new('L', (cfg['image_size'], cfg['image_size']), "WHITE")
         img_w, img_h = image_original.size
         bg_w, bg_h = background.size
         offset = ((bg_w - img_w) // 2, (bg_h - img_h) // 2)
