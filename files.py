@@ -29,10 +29,7 @@ def save_figs(cfg, list_images_names, list_index, model, path, x):
 
         mask = tf.keras.preprocessing.image.array_to_img(mask).convert('L')
         image_original = tf.keras.preprocessing.image.load_img(list_images_names[index].resolve())
-        if cfg['channel'] == 1:
-            image_original = image_original.convert('L')
-        else:
-            image_original = image_original.convert('RGBA')
+        image_original = image_original.convert('RGBA')
         new_filename = os.path.join(path, 'transparency', filename + '_transparente.png')
         image_original.putalpha(mask)
         image_original.save(new_filename)
