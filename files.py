@@ -30,7 +30,7 @@ def save_figs(cfg, list_images_names, list_index, model, path, x):
         image_original.putalpha(mask)
         image_original.save(new_filename)
 
-        background = Image.new('RGBA', (cfg['image_size'], cfg['image_size']), 'WHITE')
+        background = Image.new('RGB', (cfg['image_size'], cfg['image_size']), 'WHITE')
         img_w, img_h = image_original.size
         bg_w, bg_h = background.size
         offset = ((bg_w - img_w) // 2, (bg_h - img_h) // 2)
