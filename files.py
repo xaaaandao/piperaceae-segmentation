@@ -25,12 +25,12 @@ def save_figs(cfg, list_images_names, list_index, model, path, x):
 
         mask = tf.keras.preprocessing.image.array_to_img(mask).convert('L')
         image = tf.keras.preprocessing.image.array_to_img(x[index])
-        image_original = image.convert('L')
+        image_original = image.convert('RGBA')
         new_filename = os.path.join(path, 'transparency', str(list_images_names[index].stem) + '_transparente.png')
         image_original.putalpha(mask)
         image_original.save(new_filename)
 
-        background = Image.new('RGB', (cfg['image_size'], cfg['image_size']), 'WHITE')
+        background = Image.new('RGBA', (cfg['image_size'], cfg['image_size']), 'WHITE')
         img_w, img_h = image_original.size
         bg_w, bg_h = background.size
         offset = ((bg_w - img_w) // 2, (bg_h - img_h) // 2)
@@ -40,7 +40,7 @@ def save_figs(cfg, list_images_names, list_index, model, path, x):
             background = background.convert('RGB')
         else:
             background = background.convert('L')
-        background.save(new_filename)
+        background.save(new_filename, format='jpeg')
 
 
 def save_fit_history(fold, fit, path):
