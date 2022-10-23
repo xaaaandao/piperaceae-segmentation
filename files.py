@@ -36,7 +36,10 @@ def save_figs(cfg, list_images_names, list_index, model, path, x):
         offset = ((bg_w - img_w) // 2, (bg_h - img_h) // 2)
         background.paste(image_original, offset, image_original)
         new_filename = os.path.join(path, 'w_pred_mask', str(list_images_names[index].stem) + '.jpeg')
-        background = background.convert('RGB')
+        if cfg['channel'] == 3:
+            background = background.convert('RGB')
+        else:
+            background = background.convert('L')
         background.save(new_filename)
 
 
