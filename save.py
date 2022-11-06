@@ -5,6 +5,8 @@ import pandas as pd
 import pathlib
 import time
 
+from files import create_dir
+
 
 def save_cfg(cfg, filename, images_folder, list_images, list_labels, masks_folder):
     values = ['batch_size', 'epochs', 'learning_rate', 'loss_function', 'images', 'masks', 'len_images', 'len_masks',
@@ -129,7 +131,7 @@ def save_xlsx(best, cfg, mean, mean_time, path):
 
 def save_csv(best, cfg, mean, mean_time, path):
     path = os.path.join(path, 'csv')
-    pathlib.Path(path).mkdir(exist_ok=True, parents=True)
+    create_dir([path])
     best.to_csv(os.path.join(path, 'best.csv'), sep=';', na_rep='', quoting=csv.QUOTE_ALL)
     cfg.to_csv(os.path.join(path, 'cfg.csv'), sep=';', na_rep='', quoting=csv.QUOTE_ALL, header=False)
     mean.to_csv(os.path.join(path, 'mean.csv'), sep=';', na_rep='', quoting=csv.QUOTE_ALL)

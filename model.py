@@ -4,8 +4,12 @@ import time
 from metrics import dice_loss, jaccard_distance_loss
 
 
+def loss_function_is_dice(loss_function):
+    return loss_function == 'dice'
+
+
 def get_loss_function(loss_function):
-    return dice_loss if loss_function == 'dice' else jaccard_distance_loss
+    return dice_loss if loss_function_is_dice(loss_function) else jaccard_distance_loss
 
 
 def evaluate(end_time, fold, model, x_train, x_val, x_test, y_train, y_val, y_test):
