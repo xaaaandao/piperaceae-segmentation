@@ -46,10 +46,12 @@ def get_path_best_model_grayscale_and_size_is_512():
 
 def get_dir_out_grayscale(image_size, taxon, threshold):
     return f'/home/xandao/Documentos/GitHub/dataset_gimp/imagens_george/imagens/grayscale/{taxon}/{image_size}/{threshold}/'
+    # return f'/home/xandao/Documentos/GitHub/dataset_gimp/imagens_br/imagens/grayscale/segmented_unet/{image_size}'
 
 
 def get_dir_out_rgb(image_size, taxon, threshold):
     return f'/home/xandao/Documentos/GitHub/dataset_gimp/imagens_george/imagens/RGB/{taxon}/{image_size}/{threshold}/'
+    # return f'/home/xandao/Documentos/GitHub/dataset_gimp/imagens_sp/imagens/RGB/segmented_unet/{image_size}'
 
 
 def image_size_is_256(image_size):
@@ -65,7 +67,7 @@ def image_rgb_size_is_not_256(image_size):
 
 
 def image_grayscale_size_is_not_256(image_size):
-    return get_path_best_model_rgb_and_size_is_400() if image_size_is_400(image_size) else get_path_best_model_rgb_and_size_is_512()
+    return get_path_best_model_grayscale_and_size_is_400() if image_size_is_400(image_size) else get_path_best_model_grayscale_and_size_is_512()
 
 
 def get_model_rgb(image_size):
@@ -88,7 +90,6 @@ def create_dir_out(list_f):
     for f in list_f:
         for d in ['mask_unet', 'w_pred_mask', 'transparency']:
             p = os.path.join(f, d)
-            print(p)
             pathlib.Path(p).mkdir(parents=True, exist_ok=True)
 
 
@@ -122,8 +123,10 @@ def save_image_segmented_background_white(color_mode, file, image_original, imag
 
 
 def save_mask(color_mode, file, image_original, image_size, model, path):
+    print(color_mode, type(color_mode), image_size, type(image_size))
     image = tf.keras.preprocessing.image.img_to_array(image_original)
     image = image / 255
+    print(image.shape)
     image = image.reshape((1, image_size, image_size, color_mode))
     mask = model.predict(image)
     mask = mask[0, :, :, :]
@@ -143,8 +146,6 @@ def save_mask(color_mode, file, image_original, image_size, model, path):
 @click.option(
     '--size',
     '-s',
-    multiple=True,
-    default=[1],
     help='Image size',
     type=int,
     required=True
@@ -157,16 +158,18 @@ def save_mask(color_mode, file, image_original, image_size, model, path):
 )
 @click.option(
     '--threshold',
-    multiple=True,
-    default=[1],
     type=int,
     required=True
 )
 def main(color, size, taxon, threshold):
-    for image_size in size:
-        for threshold in threshold:
-            unet_model = get_unet_model(color, image_size)
-            dir_out = get_dir_out(color, image_size, taxon, threshold)
+    if color.lower() == 'rgb':
+        color_mode = 3
+    else:
+        color_mode = 1
+    for image_size in [int(size)]:
+        for threshold in [int(threshold)]:
+            unet_model = get_unet_model(color_mode, int(image_size))
+            dir_out = get_dir_out(color_mode, image_size, taxon, threshold)
             list_images = sorted([file for file in pathlib.Path(dir_out).rglob('*.jpeg')])
             list_dir_out = sorted([d for d in pathlib.Path(dir_out).glob('*') if d.is_dir()])
             create_dir_out(list_dir_out)
@@ -174,12 +177,12 @@ def main(color, size, taxon, threshold):
 
             for i, file in enumerate(list_images):
                 print(i, file.resolve())
-                image_original = get_image(color, file)
+                image_original = get_image(color_mode, file)
                 index_path = str(file.resolve()).index('jpeg')
                 path = str(file.resolve())[0:index_path]
-                mask = save_mask(color, file, image_original, image_size, model, path)
+                mask = save_mask(color_mode, file, image_original, int(image_size), model, path)
                 image_original = save_image_segmented_background_transparency(file, image_original, mask, path)
-                save_image_segmented_background_white(color, file, image_original, image_size, path)
+                save_image_segmented_background_white(color_mode, file, image_original, int(image_size), path)
 
 
 if __name__ == '__main__':
