@@ -45,12 +45,12 @@ def get_path_best_model_grayscale_and_size_is_512():
 
 
 def get_dir_out_grayscale(image_size, taxon, threshold):
-    return f'/home/xandao/Documentos/GitHub/dataset_gimp/imagens_george/imagens/grayscale/{taxon}/{image_size}/{threshold}/'
-    # return f'/home/xandao/Documentos/GitHub/dataset_gimp/imagens_br/imagens/grayscale/segmented_unet/{image_size}'
+    return f'/home/xandao/grayscale/{image_size}/'
+    # return f'/home/xandao/gmented_unet/{image_size}'
 
 
 def get_dir_out_rgb(image_size, taxon, threshold):
-    return f'/home/xandao/Documentos/GitHub/dataset_gimp/imagens_george/imagens/RGB/{taxon}/{image_size}/{threshold}/'
+    return f'/home/xandao/RGB/{image_size}/'
     # return f'/home/xandao/Documentos/GitHub/dataset_gimp/imagens_sp/imagens/RGB/segmented_unet/{image_size}'
 
 
@@ -156,20 +156,13 @@ def save_mask(color_mode, file, image_original, image_size, model, path):
     type=click.Choice(['genus', 'specific_epithet']),
     required=True
 )
-@click.option(
-    '--threshold',
-    type=int,
-    required=True
-)
-def main(color, size, taxon, threshold):
-    if color.lower() == 'rgb':
-        color_mode = 3
-    else:
-        color_mode = 1
+def main(color, size, taxon):
+    color_mode = set_color(color)
     for image_size in [int(size)]:
-        for threshold in [int(threshold)]:
+        for threshold in [0]:
             unet_model = get_unet_model(color_mode, int(image_size))
             dir_out = get_dir_out(color_mode, image_size, taxon, threshold)
+            print(dir_out)
             list_images = sorted([file for file in pathlib.Path(dir_out).rglob('*.jpeg')])
             list_dir_out = sorted([d for d in pathlib.Path(dir_out).glob('*') if d.is_dir()])
             create_dir_out(list_dir_out)
@@ -183,6 +176,10 @@ def main(color, size, taxon, threshold):
                 mask = save_mask(color_mode, file, image_original, int(image_size), model, path)
                 image_original = save_image_segmented_background_transparency(file, image_original, mask, path)
                 save_image_segmented_background_white(color_mode, file, image_original, int(image_size), path)
+
+
+def set_color(color):
+    return 3 if color.lower() == 'rgb' else 1
 
 
 if __name__ == '__main__':
