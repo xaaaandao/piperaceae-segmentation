@@ -21,37 +21,37 @@ def image_is_grayscale(color_mode):
 
 
 def get_path_best_model_rgb_and_size_is_256():
-    return '/home/xandao/Documentos/resultados_gimp/u-net/RGB/23-10-2022-22-39-56/0/unet.h5'
+    return '/home/none/Documentos/resultados_gimp/u-net/RGB/23-10-2022-22-39-56/0/unet.h5'
 
 
 def get_path_best_model_rgb_and_size_is_400():
-    return '/home/xandao/Documentos/resultados_gimp/u-net/RGB/23-10-2022-22-14-17/3/unet.h5'
+    return '/home/none/Documentos/resultados_gimp/u-net/RGB/23-10-2022-22-14-17/3/unet.h5'
 
 
 def get_path_best_model_rgb_and_size_is_512():
-    return '/home/xandao/Documentos/resultados_gimp/u-net/RGB/23-10-2022-22-52-42/4/unet.h5'
+    return '/home/none/Documentos/resultados_gimp/u-net/RGB/23-10-2022-22-52-42/4/unet.h5'
 
 
 def get_path_best_model_grayscale_and_size_is_256():
-    return '/home/xandao/Documentos/resultados_gimp/u-net/grayscale/23-10-2022-20-19-47/3/unet.h5'
+    return '/home/none/Documentos/resultados_gimp/u-net/grayscale/23-10-2022-20-19-47/3/unet.h5'
 
 
 def get_path_best_model_grayscale_and_size_is_400():
-    return '/home/xandao/Documentos/resultados_gimp/u-net/grayscale/23-10-2022-21-31-58/3/unet.h5'
+    return '/home/none/Documentos/resultados_gimp/u-net/grayscale/23-10-2022-21-31-58/3/unet.h5'
 
 
 def get_path_best_model_grayscale_and_size_is_512():
-    return '/home/xandao/Documentos/resultados_gimp/u-net/grayscale/23-10-2022-20-55-01/4/unet.h5'
+    return '/home/none/Documentos/resultados_gimp/u-net/grayscale/23-10-2022-20-55-01/4/unet.h5'
 
 
 def get_dir_out_grayscale(image_size, taxon, threshold):
-    return f'/home/xandao/grayscale/{image_size}/'
-    # return f'/home/xandao/gmented_unet/{image_size}'
+    return f'/home/none/grayscale/{image_size}/'
+    # return f'/home/none/gmented_unet/{image_size}'
 
 
 def get_dir_out_rgb(image_size, taxon, threshold):
-    return f'/home/xandao/RGB/{image_size}/'
-    # return f'/home/xandao/Documentos/GitHub/dataset_gimp/imagens_sp/imagens/RGB/segmented_unet/{image_size}'
+    return f'/home/none/RGB/{image_size}/'
+    # return f'/home/none/Documentos/GitHub/dataset_gimp/imagens_sp/imagens/RGB/segmented_unet/{image_size}'
 
 
 def image_size_is_256(image_size):
