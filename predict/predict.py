@@ -1,9 +1,14 @@
 import click
 import os
 import pathlib
+import sys
 import tensorflow as tf
 
 from PIL import Image
+
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from metrics import dice_coef, dice_loss, jaccard_distance
 
 
@@ -53,18 +58,18 @@ def main(best, img_size, input_dir, output_dir):
         os.makedirs(output, exist_ok=True)
         
 
-    images = sorted([file for file in pathlib.Path(input_dir).rglob("*.jpeg")])
+    images = sorted([file for file in pathlib.Path(input_dir).rglob("*.jp*")])
     model = tf.keras.models.load_model(best, custom_objects = {"dice_loss": dice_loss, "dice_coef": dice_coef, "jaccard_distance": jaccard_distance })
 
+    print("input_dir: %s" % input_dir)
+    print("num_images: %d" % len(images))
     for i, image in enumerate(images):
         print(i, image.resolve())
         # se for escala de cinza colocar color_mode="grayscale"
         image_original = tf.keras.preprocessing.image.load_img(image.resolve())
-        index_path = str(image.resolve()).index("jpeg")
-        path = str(image.resolve())[0:index_path]
-        # mask = save_mask(image, image_original, img_size, model, path)
-        # image_original = save_image_segmented_background_transparency(image, image_original, mask, path)
-        # save_image_segmented_background_white(image, image_original, img_size, path)
+        mask = save_mask(image, image_original, img_size, model, output_dir)
+        image_original = save_image_segmented_background_transparency(image, image_original, mask, output_dir)
+        save_image_segmented_background_white(image, image_original, img_size, output_dir)
 
 
 if __name__ == "__main__":

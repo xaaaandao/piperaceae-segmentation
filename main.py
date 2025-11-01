@@ -77,8 +77,9 @@ def train(batch_size, channel, data_aug, epochs, img_size, learning_rate, loss_f
 
     steps_per_epoch = math.ceil(x_train.shape[0] / batch_size)
     train_generator = get_data_augmentation(batch_size, data_aug, x_train, y_train, augment)
+    val_generator = CreateSequence(x_val, y_val, batch_size)
     reduce_learning_rate = tf.keras.callbacks.ReduceLROnPlateau(monitor="loss", factor=0.5, patience=3, verbose=1)
-    filename = os.path.join(output, "unet.h5")
+    filename = os.path.join(output, "unet.keras")
     checkpointer = tf.keras.callbacks.ModelCheckpoint(filename, verbose=1, save_best_only=True)
     strategy = tf.distribute.MirroredStrategy()
 
@@ -88,20 +89,20 @@ def train(batch_size, channel, data_aug, epochs, img_size, learning_rate, loss_f
         model.compile(optimizer=adam_opt, loss=loss_function, metrics=[dice_coef, jaccard_distance, tf.keras.metrics.Precision(), tf.keras.metrics.Recall()])
 
     tf.keras.backend.clear_session()
-    return model.fit(train_generator, steps_per_epoch=steps_per_epoch, epochs=epochs, validation_data=(x_val, y_val), callbacks=[checkpointer, reduce_learning_rate]), model
+    return model.fit(train_generator, steps_per_epoch=steps_per_epoch, epochs=epochs, validation_data=val_generator, callbacks=[checkpointer, reduce_learning_rate]), model
 
 
 @click.command()
-@click.option("--channel", default=3)
-@click.option("--data_aug", default=False)
-@click.option("--batch_size", default=4)
-@click.option("--folds", default=5)
-@click.option("--epochs", default=75)
-@click.option("--img_size", default=256)
+@click.option("--channel", type=int, default=3)
+@click.option("--data_aug", type=bool, default=False)
+@click.option("--batch_size", type=int, default=4)
+@click.option("--folds", type=int, default=5)
+@click.option("--epochs", type=int, default=75)
+@click.option("--img_size", type=int, default=256)
 @click.option("--input_images", type=str)
 @click.option("--input_masks", type=str)
 @click.option("--learning_rate", default=0.001)
-@click.option("--random_state", default=1234)
+@click.option("--random_state", type=int, default=1234)
 @click.option("--test_size", default=0.2)
 @click.option("--val_size", default=0.05)
 @click.option("--loss_function", type=click.Choice(["dice", "jaccard"]), default="dice")
